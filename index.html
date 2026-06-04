@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEMAIN·S — Un village du futur, maintenant</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap');
+
+    :root {
+      --noir:   #0A0A0A;
+      --sombre: #111111;
+      --gris1:  #1A1A1A;
+      --gris2:  #2A2A2A;
+      --or:     #B8912E;
+      --or-v:   #D4A843;
+      --blanc:  #F5F0E8;
+      --gris-t: #888880;
+      --vert:   #2A5C3F;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      font-family:'Inter', sans-serif;
+      background:var(--noir); color:var(--blanc);
+      overflow-x:hidden; -webkit-font-smoothing:antialiased;
+    }
+    * { cursor:none; }
+    .cursor { width:10px; height:10px; border-radius:50%; background:var(--or); position:fixed; z-index:9999; pointer-events:none; transform:translate(-50%,-50%); mix-blend-mode:difference; }
+    .cursor-ring { width:36px; height:36px; border-radius:50%; border:1px solid rgba(184,145,46,.4); position:fixed; z-index:9998; pointer-events:none; transform:translate(-50%,-50%); transition:transform .15s ease; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:26px 48px; display:flex; justify-content:space-between; align-items:center; }
+    .nav-logo { font-family:'Playfair Display',serif; font-size:1rem; letter-spacing:.22em; text-transform:uppercase; color:var(--blanc); font-weight:300; text-decoration:none; }
+    .nav-logo span { color:var(--or); }
+    .nav-links { display:flex; gap:32px; align-items:center; }
+    .nav-links a { font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; color:var(--gris-t); text-decoration:none; transition:color .3s; }
+    .nav-links a:hover { color:var(--blanc); }
+    .nav-cta { color:var(--or) !important; border:1px solid var(--or); padding:9px 20px; border-radius:2px; transition:all .3s !important; }
+    .nav-cta:hover { background:var(--or) !important; color:var(--noir) !important; }
+
+    /* HERO */
+    .hero { height:100vh; min-height:720px; display:flex; flex-direction:column; justify-content:flex-end; padding:0 48px 88px; position:relative; overflow:hidden; }
+    .hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80') center/cover; filter:brightness(.25) saturate(.5); }
+    .hero-line { position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--or),transparent); opacity:.35; }
+    .hero-content { position:relative; z-index:2; max-width:1100px; }
+    .eyebrow-sm { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--or); margin-bottom:26px; display:flex; align-items:center; gap:14px; }
+    .eyebrow-sm::before { content:''; display:block; width:36px; height:1px; background:var(--or); }
+    .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,6vw,5.5rem); line-height:1.03; font-weight:300; letter-spacing:-.02em; margin-bottom:20px; }
+    .hero h1 em { font-style:italic; color:var(--or); }
+    .hero-sub { font-size:clamp(.9rem,1.5vw,1.1rem); font-weight:300; color:rgba(245,240,232,.55); line-height:1.75; max-width:640px; margin-bottom:16px; }
+    .hero-sub strong { color:rgba(245,240,232,.85); font-weight:400; }
+    .hero-note { font-size:.82rem; font-weight:300; color:rgba(245,240,232,.38); line-height:1.7; max-width:580px; margin-bottom:44px; font-style:italic; }
+    .hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn-fill { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; background:var(--or); padding:14px 26px; color:var(--noir); text-decoration:none; font-weight:500; border-radius:2px; transition:all .3s; border:1px solid var(--or); }
+    .btn-fill:hover { background:var(--or-v); border-color:var(--or-v); }
+    .btn-outline { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; border:1px solid rgba(245,240,232,.22); padding:14px 26px; color:var(--blanc); text-decoration:none; transition:all .3s; border-radius:2px; }
+    .btn-outline:hover { border-color:var(--or); color:var(--or); }
+    .scroll-indicator { position:absolute; bottom:32px; right:48px; font-size:.64rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gris-t); display:flex; flex-direction:column; align-items:center; gap:8px; z-index:2; }
+    .scroll-line { width:1px; height:44px; background:linear-gradient(to bottom,var(--or),transparent); animation:drop 2s infinite; }
+    @keyframes drop { 0%,100%{opacity:1}50%{opacity:.3} }
+
+    /* BAND */
+    .band { border-top:1px solid var(--gris2); border-bottom:1px solid var(--gris2); display:grid; grid-template-columns:repeat(5,1fr); }
+    .band-item { padding:40px 28px; border-right:1px solid var(--gris2); transition:background .3s; }
+    .band-item:last-child { border-right:none; }
+    .band-item:hover { background:var(--gris1); }
+    .band-n { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:300; color:var(--or); line-height:1; margin-bottom:8px; }
+    .band-label { font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gris-t); line-height:1.5; }
+
+    /* SECTIONS */
+    section { padding:112px 48px; }
+    .wrap { max-width:1200px; margin:0 auto; }
+    .s-num { font-size:.64rem; letter-spacing:.2em; text-transform:uppercase; color:var(--or); margin-bottom:10px; }
+    h2 { font-family:'Playfair Display',serif; font-size:clamp(1.9rem,4vw,3.4rem); font-weight:300; line-height:1.18; letter-spacing:-.01em; margin-bottom:28px; }
+    h2 em { font-style:italic; color:var(--or); }
+    .lead { font-size:1rem; line-height:1.85; font-weight:300; color:rgba(245,240,232,.6); max-width:660px; }
+    hr.div { border:none; border-top:1px solid var(--gris2); }
+
+    /* VISION */
+    .vision { background:var(--sombre); }
+    .vision-cols { display:grid; grid-template-columns:1fr 1fr; gap:80px; border-top:1px solid var(--gris2); padding-top:56px; margin-top:8px; }
+    .vision-quote { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.5vw,1.9rem); font-weight:300; font-style:italic; line-height:1.5; color:rgba(245,240,232,.88); border-left:2px solid var(--or); padding-left:28px; }
+    .vision-body { display:flex; flex-direction:column; gap:20px; }
+    .vision-body p { font-size:.95rem; line-height:1.85; font-weight:300; color:rgba(245,240,232,.55); }
+    .vision-body p strong { color:rgba(245,240,232,.9); font-weight:400; }
+    .vision-body p em { font-style:italic; color:rgba(245,240,232,.75); }
+
+    /* LIEU */
+    .lieu-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gris2); margin-top:56px; }
+    .lieu-img { height:520px; overflow:hidden; }
+    .lieu-img img { width:100%; height:100%; object-fit:cover; filter:saturate(.65) brightness(.8); transition:transform .8s; }
+    .lieu-img:hover img { transform:scale(1.04); }
+    .lieu-info { background:var(--noir); padding:48px; display:flex; flex-direction:column; justify-content:space-between; }
+    .lieu-info h3 { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:300; line-height:1.35; margin-bottom:28px; }
+    .lieu-stat { display:flex; justify-content:space-between; align-items:baseline; padding:15px 0; border-bottom:1px solid var(--gris2); }
+    .lieu-stat:last-of-type { border-bottom:none; }
+    .lieu-stat-l { font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gris-t); }
+    .lieu-stat-v { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:300; }
+    .lieu-note { margin-top:28px; padding:18px 20px; border:1px solid var(--gris2); font-size:.82rem; line-height:1.7; color:rgba(245,240,232,.42); font-style:italic; }
+
+    /* MODÈLE DE VIE */
+    .modele { background:var(--sombre); }
+    .modele-cols { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gris2); margin-top:56px; }
+    .modele-col { background:var(--sombre); padding:48px; }
+    .modele-col h3 { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:300; color:rgba(245,240,232,.85); margin-bottom:28px; padding-bottom:22px; border-bottom:1px solid var(--gris2); }
+    .m-item { display:flex; gap:18px; margin-bottom:26px; }
+    .m-n { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:300; color:var(--or); line-height:1; flex-shrink:0; width:24px; }
+    .m-text h4 { font-size:.85rem; font-weight:500; letter-spacing:.04em; margin-bottom:6px; color:var(--blanc); }
+    .m-text p { font-size:.85rem; line-height:1.72; color:rgba(245,240,232,.48); font-weight:300; }
+    .m-box { background:var(--gris1); border:1px solid var(--gris2); padding:24px; margin-top:6px; border-radius:2px; }
+    .m-box .big { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:300; color:var(--or); line-height:1; margin-bottom:6px; }
+    .m-box p { font-size:.8rem; color:rgba(245,240,232,.45); line-height:1.6; }
+    .m-box .or { color:var(--or); }
+    .m-two { display:grid; grid-template-columns:1fr auto 1fr; gap:16px; align-items:center; }
+    .m-sep { font-size:.78rem; color:var(--gris-t); text-align:center; }
+
+    /* CE QUE LA COMMUNAUTÉ PEUT CRÉER */
+    .creer { background:var(--noir); }
+    .creer-intro { max-width:700px; margin-bottom:56px; }
+    .creer-cols { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gris2); }
+    .creer-col { background:var(--noir); padding:44px; }
+    .creer-col h3 { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:300; color:rgba(245,240,232,.85); margin-bottom:28px; padding-bottom:18px; border-bottom:1px solid var(--gris2); letter-spacing:.02em; }
+    .creer-item { margin-bottom:26px; }
+    .creer-item h4 { font-size:.82rem; font-weight:500; letter-spacing:.06em; text-transform:uppercase; color:var(--or); margin-bottom:7px; }
+    .creer-item p { font-size:.84rem; line-height:1.7; color:rgba(245,240,232,.48); font-weight:300; }
+    .creer-item em { color:rgba(245,240,232,.32); font-style:italic; font-size:.8rem; display:block; margin-top:5px; }
+
+    /* GOUVERNANCE */
+    .gouv { background:var(--sombre); }
+    .gouv-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; border-top:1px solid var(--gris2); padding-top:56px; margin-top:8px; }
+    .gouv-quote { font-family:'Playfair Display',serif; font-size:clamp(1.2rem,2.2vw,1.7rem); font-weight:300; font-style:italic; line-height:1.5; color:rgba(245,240,232,.85); border-left:2px solid var(--or); padding-left:28px; }
+    .gouv-body p { font-size:.93rem; line-height:1.85; font-weight:300; color:rgba(245,240,232,.52); margin-bottom:18px; }
+    .gouv-body p strong { color:var(--blanc); font-weight:400; }
+
+    /* PILIERS */
+    .piliers { background:var(--noir); }
+    .piliers-intro { max-width:680px; margin-bottom:56px; }
+    .piliers-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--gris2); }
+    .pilier { background:var(--noir); padding:34px 28px; transition:background .3s; }
+    .pilier:hover { background:var(--gris1); }
+    .pilier-ico { font-size:1.4rem; margin-bottom:14px; display:block; }
+    .pilier h4 { font-family:'Playfair Display',serif; font-size:1rem; font-weight:400; margin-bottom:8px; }
+    .pilier p { font-size:.8rem; line-height:1.65; color:rgba(245,240,232,.4); font-weight:300; margin-bottom:8px; }
+    .pilier em { font-size:.75rem; color:rgba(245,240,232,.28); font-style:italic; }
+
+    /* ECONOMICS */
+    .eco { background:var(--sombre); }
+    .eco-layout { display:grid; grid-template-columns:1fr 1.1fr; gap:72px; margin-top:56px; }
+    .eco-block { margin-bottom:24px; }
+    .eco-block h3 { font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gris-t); padding:14px 22px; background:var(--gris1); border:1px solid var(--gris2); margin-bottom:0; }
+    .eco-table { border:1px solid var(--gris2); border-top:none; }
+    .eco-row { display:flex; justify-content:space-between; align-items:center; padding:14px 22px; border-bottom:1px solid var(--gris2); font-size:.84rem; }
+    .eco-row:last-child { border-bottom:none; }
+    .eco-row .l { color:rgba(245,240,232,.5); font-weight:300; }
+    .eco-row .v { font-family:'Playfair Display',serif; font-size:.98rem; font-weight:300; color:var(--blanc); }
+    .eco-row.tot { background:var(--gris1); }
+    .eco-row.tot .l { color:var(--blanc); font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; }
+    .eco-row.tot .v { color:var(--or); font-size:1.1rem; }
+    .eco-right { display:flex; flex-direction:column; gap:24px; }
+    .eco-right h3 { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:300; line-height:1.4; }
+    .eco-right p { font-size:.9rem; line-height:1.82; color:rgba(245,240,232,.5); font-weight:300; }
+    .eco-right p strong { color:var(--blanc); font-weight:400; }
+    .eco-highlight { border:1px solid var(--or); padding:32px; text-align:center; border-radius:2px; }
+    .eco-highlight .num { font-family:'Playfair Display',serif; font-size:3.2rem; font-weight:300; color:var(--or); line-height:1; margin-bottom:8px; }
+    .eco-highlight p { font-size:.75rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(245,240,232,.45); }
+    .eco-sub { background:var(--gris1); border:1px solid var(--gris2); padding:22px; border-radius:2px; }
+    .eco-sub .num2 { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:300; color:var(--blanc); line-height:1; margin-bottom:6px; }
+    .eco-sub p { font-size:.78rem; color:rgba(245,240,232,.4); line-height:1.6; }
+
+    /* POURQUOI */
+    .pourquoi { background:var(--noir); }
+    .pq-cols { display:grid; grid-template-columns:1fr 1fr; gap:80px; border-top:1px solid var(--gris2); padding-top:56px; margin-top:8px; }
+    .pq-left p { font-size:.95rem; line-height:1.85; font-weight:300; color:rgba(245,240,232,.55); margin-bottom:18px; }
+    .pq-left p strong { color:var(--blanc); font-weight:400; }
+    .pq-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .pq-tag { font-size:.75rem; border:1px solid var(--gris2); padding:7px 14px; color:rgba(245,240,232,.5); border-radius:2px; transition:border-color .2s; }
+    .pq-tag:hover { border-color:var(--or); color:var(--or); }
+
+    /* HUB */
+    .hub { background:var(--sombre); }
+    .hub-inner { display:grid; grid-template-columns:1fr 1fr; gap:80px; border-top:1px solid var(--gris2); padding-top:56px; margin-top:8px; }
+    .hub-quote { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.5vw,1.9rem); font-weight:300; font-style:italic; line-height:1.5; color:rgba(245,240,232,.88); border-left:2px solid var(--or); padding-left:28px; }
+    .hub-body p { font-size:.93rem; line-height:1.85; font-weight:300; color:rgba(245,240,232,.52); margin-bottom:16px; }
+    .hub-body p strong { color:var(--blanc); font-weight:400; }
+
+    /* REJOINDRE */
+    .rejoindre { background:var(--noir); }
+    .rejoin-cols { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:56px; }
+    .rejoin-left h3 { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:300; line-height:1.4; margin-bottom:22px; }
+    .rejoin-left p { font-size:.92rem; line-height:1.85; color:rgba(245,240,232,.52); font-weight:300; margin-bottom:16px; }
+    .rejoin-left p strong { color:var(--blanc); font-weight:400; }
+    .rejoin-needs { margin-top:28px; }
+    .rejoin-needs h4 { font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--or); margin-bottom:14px; }
+    .rejoin-tags { display:flex; flex-wrap:wrap; gap:7px; }
+    .rejoin-tag { font-size:.75rem; border:1px solid var(--gris2); padding:6px 13px; color:rgba(245,240,232,.45); border-radius:2px; }
+    .rejoin-btns { display:flex; flex-direction:column; gap:10px; margin-top:28px; }
+
+    /* FORM */
+    form { display:flex; flex-direction:column; }
+    .field { display:flex; flex-direction:column; gap:7px; margin-bottom:18px; }
+    .field label { font-size:.64rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gris-t); }
+    .field input, .field select, .field textarea {
+      background:var(--gris1); border:1px solid var(--gris2); border-radius:2px;
+      padding:13px 16px; color:var(--blanc); font-family:'Inter',sans-serif;
+      font-size:.88rem; font-weight:300; outline:none; transition:border-color .3s; width:100%;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--or); }
+    .field select option { background:var(--gris1); }
+    .field textarea { min-height:90px; resize:vertical; }
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .tags-f { display:flex; flex-direction:column; gap:7px; margin-bottom:18px; }
+    .tags-f label { font-size:.64rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gris-t); }
+    .tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:2px; }
+    .ti { display:none; }
+    .ti + label { font-size:.74rem; padding:7px 14px; border:1px solid var(--gris2); color:rgba(245,240,232,.45); border-radius:2px; transition:all .2s; letter-spacing:0; text-transform:none; font-weight:300; }
+    .ti:checked + label { border-color:var(--or); color:var(--or); background:rgba(184,145,46,.07); }
+    .submit { background:var(--or); color:var(--noir); border:none; padding:16px 32px; font-family:'Inter',sans-serif; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; font-weight:500; transition:background .3s; margin-top:10px; border-radius:2px; align-self:flex-start; }
+    .submit:hover { background:var(--or-v); }
+    .fnote { font-size:.72rem; color:var(--gris-t); margin-top:10px; font-weight:300; }
+    .form-ok { display:none; border:1px solid var(--or); padding:28px; text-align:center; border-radius:2px; }
+    .form-ok p { font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:rgba(245,240,232,.75); line-height:1.6; }
+
+    /* FOOTER */
+    footer { border-top:1px solid var(--gris2); padding:48px; display:flex; justify-content:space-between; align-items:center; }
+    .flogo { font-family:'Playfair Display',serif; font-size:1.15rem; font-weight:300; letter-spacing:.18em; }
+    .flogo span { color:var(--or); }
+    footer p { font-size:.7rem; letter-spacing:.05em; color:var(--gris-t); font-weight:300; line-height:1.75; text-align:right; max-width:480px; }
+
+    /* REVEALS */
+    .r { opacity:0; transform:translateY(22px); transition:opacity .85s ease, transform .85s ease; }
+    .r.in { opacity:1; transform:none; }
+    .r2 { transition-delay:.12s; }
+    .r3 { transition-delay:.24s; }
+
+    /* RESPONSIVE */
+    @media(max-width:960px) {
+      nav { padding:18px 24px; }
+      .nav-links { display:none; }
+      section { padding:72px 24px; }
+      .hero { padding:0 24px 64px; }
+      .hero h1 { font-size:3rem; }
+      .band { grid-template-columns:1fr 1fr; }
+      .band-item:nth-child(2) { border-right:none; }
+      .band-item:nth-child(3) { border-top:1px solid var(--gris2); }
+      .vision-cols, .lieu-grid, .modele-cols, .creer-cols, .gouv-inner, .eco-layout,
+      .pq-cols, .hub-inner, .rejoin-cols { grid-template-columns:1fr; gap:40px; }
+      .piliers-grid { grid-template-columns:1fr 1fr; }
+      footer { flex-direction:column; gap:20px; }
+      footer p { text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">DEMAIN<span>·S</span></a>
+  <div class="nav-links">
+    <a href="#vision">Vision</a>
+    <a href="#modele">Modèle</a>
+    <a href="#piliers">Piliers</a>
+    <a href="#economics">Économie</a>
+    <a href="#rejoindre" class="nav-cta">Rejoindre</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-line"></div>
+  <div class="hero-content">
+    <div class="eyebrow-sm">Prototype · Habitat léger · Village régénératif · Occitanie</div>
+    <h1>Village <em>habitat léger</em>,<br>maintenant.</h1>
+    <p class="hero-sub">
+      Un domaine de <strong>880 hectares</strong> en Occitanie — avec 5 000 m² de bâti existant comme base de départ,
+      mais la <strong>grande majorité du village sera en habitat léger</strong> : tiny houses, cabanes, yourtes, structures légères et réversibles.
+      Objectif : un village régénératif de <strong>300 familles</strong> (500 à 750 personnes), positif pour la région.
+    </p>
+    <p class="hero-note">
+      Ce projet n'est pas encore un village abouti. C'est un appel à des porteurs-bâtisseurs :
+      des personnes prêtes à mettre leur énergie, leurs compétences et leur temps dans la création concrète des piliers du lieu.
+      <strong style="color:rgba(245,240,232,.6);font-style:normal">Ouvert aussi aux habitants de la région — pas besoin de vivre sur place pour contribuer.</strong>
+      Un projet pensé sur 20 ans maximum, avec possibilité de renégociation pour assurer la continuité.
+    </p>
+    <div class="hero-btns">
+      <a href="#rejoindre" class="btn-fill">Je rejoins le cercle fondateur</a>
+      <a href="#piliers" class="btn-outline">Je veux porter un pilier</a>
+      <a href="#rejoindre" class="btn-outline">Je souhaite soutenir l'aventure</a>
+    </div>
+  </div>
+  <div class="scroll-indicator"><span>Défiler</span><div class="scroll-line"></div></div>
+</div>
+
+<!-- ── BAND ── -->
+<div class="band">
+  <div class="band-item r"><div class="band-n">880</div><div class="band-label">hectares<br>d'un seul tenant</div></div>
+  <div class="band-item r r2"><div class="band-n">5 000</div><div class="band-label">m² de bâti<br>base de départ</div></div>
+  <div class="band-item r r2"><div class="band-n">300</div><div class="band-label">familles<br>à terme</div></div>
+  <div class="band-item r r3"><div class="band-n">500–750</div><div class="band-label">personnes<br>estimées</div></div>
+  <div class="band-item r r3"><div class="band-n">20 ans</div><div class="band-label">maximum<br>avec renégociation</div></div>
+</div>
+
+<!-- ── 01 VISION ── -->
+<section class="vision" id="vision">
+  <div class="wrap">
+    <div class="s-num">01 — Vision</div>
+    <h2>Imaginez un endroit où<br>vous <em>appartenez</em> vraiment.</h2>
+    <div class="vision-cols r">
+      <div class="vision-quote">
+        Votre maison est un sanctuaire. Vous vivez dans un lieu où la nature, les autres, le travail, l'éducation, la nourriture, le soin et la culture ne sont plus séparés. Vous n'habitez pas seulement quelque part. Vous participez à une communauté vivante.
+      </div>
+      <div class="vision-body">
+        <p>DEMAIN·S est un projet pionnier de village régénératif en Occitanie. Un lieu où l'argent, le temps et les compétences des habitants servent à produire des biens communs : <strong>nourriture, éducation, soins, culture, accueil, infrastructures, solidarité, bien-être.</strong></p>
+        <p>Un lieu où la contribution à la communauté permet de créer une qualité de vie supérieure, accessible, mutualisée — avec des services disponibles <strong>au prix coûtant, à prix réduit, ou gratuitement</strong> selon les choix collectifs.</p>
+        <p>Mais DEMAIN·S n'est pas seulement un lieu de vie. C'est aussi un lieu de création. Il y aura mille choses à faire : produire de la nourriture, créer une école, imaginer une maison de naissance, accueillir des personnes âgées, organiser des festivals, développer des retraites, ouvrir des résidences d'artistes, construire des habitats légers, transmettre des savoirs, prendre soin du vivant.</p>
+        <p><em>Un laboratoire vivant. Un hub ouvert. Un village à construire.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 02 LE LIEU ── -->
+<section id="lieu">
+  <div class="wrap">
+    <div class="s-num">02 — Le lieu</div>
+    <h2>Un domaine d'exception<br>en <em>Occitanie</em>.</h2>
+    <div class="lieu-grid r">
+      <div class="lieu-img">
+        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80" alt="Domaine Occitanie">
+      </div>
+      <div class="lieu-info">
+        <div>
+          <h3>À environ 45 minutes<br>de Montpellier</h3>
+          <div class="lieu-stat"><span class="lieu-stat-l">Surface bâtie existante</span><span class="lieu-stat-v">5 000 m²</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Terrain total</span><span class="lieu-stat-v">880 hectares</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Vignobles en production</span><span class="lieu-stat-v">8 hectares</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Cultures existantes</span><span class="lieu-stat-v">110 hectares</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Équipements</span><span class="lieu-stat-v">Bâti · Gîtes · Piscines · Tennis</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Horizon du projet</span><span class="lieu-stat-v">20 ans maximum</span></div>
+        </div>
+        <div class="lieu-note">
+          Le domaine est déjà vivant — bâti, terres cultivées, vignes, gîtes. Cette base permet de ne pas partir d'une page blanche. Mais DEMAIN·S est avant tout un <strong style="color:rgba(245,240,232,.7);font-style:normal">prototype de village en habitat léger</strong> : la très grande majorité des habitants vivront dans des tiny houses, cabanes, yourtes et structures légères et réversibles, intégrées avec soin dans le paysage. Les 5 000 m² de bâti accueillent les espaces collectifs et quelques logements. L'habitat léger est le modèle central. L'objectif n'est pas de bétonner — c'est d'habiter une petite fraction des 880 hectares, tout en régénérant l'ensemble.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 03 MODÈLE DE VIE ── -->
+<section class="modele" id="modele">
+  <div class="wrap">
+    <div class="s-num">03 — Le modèle de vie</div>
+    <h2>Vous choisissez votre<br><em>mode de contribution</em>.</h2>
+    <p class="lead" style="margin-bottom:0">DEMAIN·S repose sur une idée simple : la communauté se donne les moyens de produire elle-même une partie essentielle de son bien-être. Chaque habitant contribue selon un cadre clair. Cette contribution est distincte du logement — elle est destinée à la communauté, à ses infrastructures, ses services et ses projets.</p>
+    <div class="modele-cols r" style="margin-top:40px">
+      <div class="modele-col">
+        <h3>Votre contribution à la communauté</h3>
+        <div class="m-item">
+          <div class="m-n">1</div>
+          <div class="m-text">
+            <h4>Contribution de base — 100 € / mois / personne</h4>
+            <p>Le socle minimal pour chaque habitant. Finance le fonctionnement commun, la gouvernance, l'entretien, les projets de base et la solidarité.</p>
+          </div>
+        </div>
+        <div class="m-box" style="margin-bottom:24px">
+          <div class="big">600 000 €</div>
+          <p>par an — sur une base indicative de 500 personnes × 100 € × 12 mois</p>
+        </div>
+        <div class="m-item">
+          <div class="m-n">2</div>
+          <div class="m-text">
+            <h4>Contribution renforcée — au choix</h4>
+            <p>En plus de la base, chacun choisit selon ses moyens, son temps, ses compétences et sa situation. Certains contribueront davantage financièrement, d'autres en temps, d'autres combineront les deux. Les proportions seront ajustées par la communauté.</p>
+          </div>
+        </div>
+        <div class="m-two">
+          <div class="m-box">
+            <div class="big">200€</div>
+            <p>/ mois supplémentaires<br><span class="or">250 pers. × 200€ × 12 = 600 000 €/an</span></p>
+          </div>
+          <div class="m-sep">ou</div>
+          <div class="m-box">
+            <div class="big">20%</div>
+            <p>du temps<br>1 jour / semaine au service du village</p>
+          </div>
+        </div>
+      </div>
+      <div class="modele-col">
+        <h3>La puissance collective</h3>
+        <div class="m-item">
+          <div class="m-n">·</div>
+          <div class="m-text">
+            <h4>En argent — total estimé</h4>
+            <p>Contribution de base + contribution renforcée :</p>
+          </div>
+        </div>
+        <div class="m-box" style="margin-bottom:22px">
+          <div class="big">1 200 000 €</div>
+          <p>par an en contributions financières</p>
+        </div>
+        <div class="m-item">
+          <div class="m-n">·</div>
+          <div class="m-text">
+            <h4>En temps — 250 personnes × 1 jour / semaine</h4>
+            <p>250 × 52 jours = 13 000 journées-hommes par an</p>
+          </div>
+        </div>
+        <div class="m-box" style="margin-bottom:22px">
+          <div class="big">50–60</div>
+          <p>équivalents temps plein au service de la communauté</p>
+        </div>
+        <div class="m-item">
+          <div class="m-n">·</div>
+          <div class="m-text">
+            <h4>Ce que ça permet concrètement</h4>
+            <p>Pas seulement de financer une idée. Mais de faire fonctionner une école, cultiver de la nourriture, accueillir des groupes, entretenir le lieu, organiser des soins, produire des événements, créer des ateliers, gérer des espaces communs, développer des projets économiques.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 04 CE QUE LA COMMUNAUTÉ PEUT CRÉER ── -->
+<section class="creer" id="creer">
+  <div class="wrap">
+    <div class="s-num">04 — Ce que la communauté peut créer</div>
+    <h2>Des biens communs<br><em>concrets</em>.</h2>
+    <div class="creer-intro r">
+      <p class="lead">Les contributions en argent et en temps servent à construire une qualité de vie partagée. Certains services pourront être accessibles gratuitement, d'autres au prix coûtant, d'autres à prix réduit. Le modèle exact sera décidé par la communauté, en fonction des priorités, des ressources et de la maturité du projet.</p>
+    </div>
+    <div class="creer-cols r">
+      <div class="creer-col">
+        <h3>Projets internes — pour les habitants</h3>
+        <div class="creer-item">
+          <h4>Production alimentaire</h4>
+          <p>Maraîchage, vergers, cultures, pain, transformation, cuisine, repas communs.</p>
+          <em>Produire une part importante de l'alimentation. Réduire les coûts, améliorer la qualité de vie.</em>
+        </div>
+        <div class="creer-item">
+          <h4>École vivante</h4>
+          <p>Pédagogie active, apprentissage par la nature, transmission intergénérationnelle.</p>
+          <em>Un cadre éducatif ancré dans le vivant, à portée de pas.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Maison de naissance</h4>
+          <p>Accompagnement autour de la naissance, de la parentalité, du post-partum et des premiers âges de la vie.</p>
+          <em>Replacer la naissance et le soin au cœur du village.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Résidence pour personnes âgées</h4>
+          <p>Habitat ou lieu de vie pour les aînés, avec dignité, lien social, entraide et participation collective.</p>
+          <em>Éviter l'isolement. Créer une vraie continuité entre les générations.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Centre de soin et de bien-être</h4>
+          <p>Soins du corps, santé préventive, accompagnement psychologique, pratiques collectives.</p>
+          <em>Faire du bien-être une infrastructure commune.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Atelier, réparation et construction</h4>
+          <p>Outils partagés, artisanat, réparation, construction légère, formation aux savoir-faire.</p>
+          <em>Réduire les coûts, partager les compétences, créer une culture du faire.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Ressourcerie et économie circulaire</h4>
+          <p>Objets, vêtements, meubles, matériaux, outils, recyclage, troc, réparation.</p>
+          <em>Transformer la consommation en dynamique communautaire.</em>
+        </div>
+      </div>
+      <div class="creer-col">
+        <h3>Projets ouverts — vers l'extérieur</h3>
+        <div class="creer-item">
+          <h4>Gîtes et accueil de groupes</h4>
+          <p>Accueil de visiteurs, séminaires, retraites, formations, résidences, stages.</p>
+          <em>Générer du chiffre d'affaires et faire rayonner le lieu.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Festivals et événements</h4>
+          <p>Festival de musique, festival du vivant, conférences, marchés, fêtes communautaires.</p>
+          <em>Faire du domaine un lieu culturel, attractif et ouvert.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Résidences d'artistes</h4>
+          <p>Accueil d'artistes, chercheurs, écrivains, artisans, créateurs et porteurs de projets.</p>
+          <em>Faire de la culture une infrastructure vivante.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Formations et transmission</h4>
+          <p>Agriculture régénérative, habitat léger, gouvernance partagée, santé intégrative, cuisine, coopération.</p>
+          <em>Faire du village un lieu d'apprentissage et de diffusion.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Co-working et nomadisme</h4>
+          <p>Accueil de télétravailleurs, entrepreneurs, chercheurs et créatifs en séjour.</p>
+          <em>Travailler dans un cadre inspirant, sans être isolé.</em>
+        </div>
+        <div class="creer-item">
+          <h4>Restauration et gastronomie</h4>
+          <p>Table commune ouverte aux visiteurs, collaboration avec des chefs, événements gastronomiques.</p>
+          <em>La table comme lieu de rencontre et de rayonnement.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 05 GOUVERNANCE ── -->
+<section class="gouv" id="gouvernance">
+  <div class="wrap">
+    <div class="s-num">05 — Gouvernance</div>
+    <h2>Une communauté structurée<br>par une <em>convention claire</em>.</h2>
+    <div class="gouv-inner r">
+      <div class="gouv-quote">
+        DEMAIN·S n'est pas un lieu sans cadre. Ce n'est pas une addition d'initiatives individuelles. Ce n'est pas non plus une structure verticale classique.
+      </div>
+      <div class="gouv-body">
+        <p>Le projet repose sur une <strong>gouvernance partagée</strong>, encadrée par une convention claire, qui définit les droits, les devoirs, les contributions, les processus de décision et les règles de vie du lieu.</p>
+        <p>La gouvernance sera facilitée par un design sur mesure des prises de décision : <strong>cercles thématiques, rôles définis, procédures d'arbitrage, transparence budgétaire</strong>, espaces de discussion, règles d'entrée et de sortie.</p>
+        <p>L'objectif n'est pas que tout le monde décide de tout, tout le temps. L'objectif est que chacun puisse contribuer là où il est <strong>compétent, concerné et légitime.</strong></p>
+        <p>Une communauté ne fonctionne pas par magie. Elle fonctionne parce que son cadre est bien conçu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 06 PILIERS ── -->
+<section class="piliers" id="piliers">
+  <div class="wrap">
+    <div class="s-num">06 — Les piliers du village</div>
+    <h2>Des infrastructures à <em>concevoir,<br>porter et faire vivre</em>.</h2>
+    <div class="piliers-intro r">
+      <p class="lead">DEMAIN·S cherche des porteurs-bâtisseurs pour imaginer et mettre en place les grands piliers du lieu. Chaque pilier devra être pensé comme un projet à part entière : son modèle économique, son fonctionnement, ses règles, ses besoins humains et son lien avec la communauté.</p>
+    </div>
+    <div class="piliers-grid r">
+      <div class="pilier">
+        <span class="pilier-ico">🌾</span>
+        <h4>Ferme nourricière</h4>
+        <p>Maraîchage, vergers, vignes, cultures, transformation alimentaire, agriculture régénérative.</p>
+        <em>Sert d'abord la communauté. Peut aussi produire des revenus externes.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🎓</span>
+        <h4>École vivante</h4>
+        <p>Pédagogie active, ancrée dans la nature, l'expérimentation, la coopération et la transmission.</p>
+        <em>Apprendre autrement. Au cœur du vivant.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🌸</span>
+        <h4>Maison de naissance</h4>
+        <p>Accompagnement autour de la naissance, des jeunes parents, de la petite enfance et du soin familial.</p>
+        <em>Accueillir la vie dans un cadre humain et communautaire.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🧓</span>
+        <h4>Résidence intergénérationnelle</h4>
+        <p>Lieu de vie pour les aînés ou personnes ayant besoin d'un cadre plus accompagné.</p>
+        <em>Vieillir dans un village, pas dans l'isolement.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🍽️</span>
+        <h4>Restaurant et lieu social</h4>
+        <p>Table commune pour les habitants, visiteurs, événements et rencontres.</p>
+        <em>Le cœur battant du village.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🌿</span>
+        <h4>Centre de soin</h4>
+        <p>Soins du corps, accompagnement, santé préventive, pratiques collectives, soutien aux personnes.</p>
+        <em>Un village qui prend soin de ses habitants.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">💻</span>
+        <h4>Co-working nature</h4>
+        <p>Espace connecté pour télétravailleurs, entrepreneurs, chercheurs, créatifs et indépendants.</p>
+        <em>Travailler dans un cadre inspirant.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🔧</span>
+        <h4>Atelier et réparation</h4>
+        <p>Outils partagés, artisanat, réparation, FabLab, construction légère, maintenance du lieu.</p>
+        <em>Réduire les coûts. Partager les compétences.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">♻️</span>
+        <h4>Ressourcerie et troc</h4>
+        <p>Objets, meubles, vêtements, livres, matériaux, outils en circulation.</p>
+        <em>La consommation devient circulaire.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🎨</span>
+        <h4>Résidence d'artistes</h4>
+        <p>Accueil d'artistes, chercheurs, formateurs, artisans et porteurs de savoirs.</p>
+        <em>Le village comme lieu de création et de diffusion.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🎪</span>
+        <h4>Festivals et événements</h4>
+        <p>Rencontres, festivals, retraites, conférences, marchés, fêtes et stages.</p>
+        <em>Le lieu attire du monde, crée du lien, génère des revenus.</em>
+      </div>
+      <div class="pilier">
+        <span class="pilier-ico">🔵</span>
+        <h4>Espace de recueillement</h4>
+        <p>Silence, méditation, spiritualité libre, contemplation et reconnexion.</p>
+        <em>Un village nourrit aussi les âmes.</em>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 07 ÉCONOMIE ── -->
+<section class="eco" id="economics">
+  <div class="wrap">
+    <div class="s-num">07 — Modèle économique</div>
+    <h2>Un modèle sobre,<br><em>contributif et productif</em>.</h2>
+    <div class="eco-layout r">
+      <div>
+        <div class="eco-block">
+          <h3>Contributions annuelles estimées</h3>
+          <div class="eco-table">
+            <div class="eco-row"><span class="l">Contribution de base (500 × 100€ × 12)</span><span class="v">600 000 €</span></div>
+            <div class="eco-row"><span class="l">Contribution renforcée argent (250 × 200€ × 12)</span><span class="v">600 000 €</span></div>
+            <div class="eco-row tot"><span class="l">Total contributions financières / an</span><span class="v">1 200 000 €</span></div>
+            <div class="eco-row"><span class="l">Contribution en temps (250 × 52 jours)</span><span class="v">13 000 j/h</span></div>
+            <div class="eco-row tot"><span class="l">Équivalent temps plein</span><span class="v">50–60 ETP</span></div>
+          </div>
+        </div>
+        <div class="eco-block">
+          <h3>Charges annuelles indicatives</h3>
+          <div class="eco-table">
+            <div class="eco-row"><span class="l">Mise à disposition long terme (lissée sur 20 ans, 0%)</span><span class="v">± 630 000 €</span></div>
+            <div class="eco-row"><span class="l">Fonctionnement hors ressources humaines</span><span class="v">± 500 000 €</span></div>
+            <div class="eco-row tot"><span class="l">Total charges indicatives / an</span><span class="v">± 1 130 000 €</span></div>
+          </div>
+        </div>
+        <div class="eco-block">
+          <h3>Activités génératrices de revenus</h3>
+          <div class="eco-table">
+            <div class="eco-row"><span class="l">Gîtes, hébergements, séminaires</span><span class="v">variable</span></div>
+            <div class="eco-row"><span class="l">Retraites, formations, festivals</span><span class="v">variable</span></div>
+            <div class="eco-row"><span class="l">Production agricole & transformation</span><span class="v">variable</span></div>
+            <div class="eco-row"><span class="l">Vignobles (8 ha existants)</span><span class="v">variable</span></div>
+            <div class="eco-row tot"><span class="l">Ces revenus renforcent le modèle</span><span class="v">non calculés ici</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="eco-right">
+        <h3>La vraie force du modèle : le temps.</h3>
+        <p>Avec 1 200 000 € de contributions financières annuelles, le projet couvre une base importante de fonctionnement. Mais la vraie puissance réside dans les <strong>13 000 journées-hommes disponibles par an.</strong></p>
+        <p>Cette force de travail permet de produire en interne, de réduire les coûts, d'améliorer le lieu en continu et de développer des activités génératrices de revenus.</p>
+        <p>Les revenus des activités extérieures — hébergements, événements, agriculture, formations — ne remplacent pas la contribution des habitants. Ils la <strong>renforcent.</strong></p>
+        <div class="eco-highlight">
+          <div class="num">50–60</div>
+          <p>équivalents temps plein<br>au service de la communauté chaque année</p>
+        </div>
+        <div class="eco-sub">
+          <div class="num2">1 200 000 €</div>
+          <p>de contributions financières annuelles<br>pour couvrir le fonctionnement et investir en continu</p>
+        </div>
+        <p style="font-size:.82rem;color:rgba(245,240,232,.32);font-style:italic;line-height:1.7">Le modèle juridique, économique et communautaire est en cours de structuration. Ces chiffres sont des projections indicatives, révisables par la communauté.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 08 POURQUOI ── -->
+<section class="pourquoi" id="pourquoi">
+  <div class="wrap">
+    <div class="s-num">08 — Pourquoi ce modèle peut fonctionner</div>
+    <h2>Parce qu'il transforme l'argent<br>et le temps en <em>qualité de vie</em>.</h2>
+    <div class="pq-cols r">
+      <div class="pq-left">
+        <p>Dans un modèle classique, chaque famille paie séparément pour tout : logement, alimentation, garde d'enfants, école, soins, voiture, loisirs, vacances, soutien, services, outils, espaces de travail.</p>
+        <p>À DEMAIN·S, une partie de ces besoins est <strong>mutualisée, produite localement ou organisée collectivement.</strong></p>
+        <p>La contribution à la communauté permet de financer et de produire des services qui améliorent directement la vie quotidienne. Ce n'est pas une charge en plus. C'est une manière de <strong>déplacer une partie des dépenses individuelles vers une production collective</strong> plus efficace, plus humaine et plus résiliente.</p>
+      </div>
+      <div>
+        <p style="font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gris-t);margin-bottom:14px">Ce que la communauté produit ensemble</p>
+        <div class="pq-tags">
+          <span class="pq-tag">Nourriture locale</span>
+          <span class="pq-tag">Repas communs</span>
+          <span class="pq-tag">École</span>
+          <span class="pq-tag">Maison de naissance</span>
+          <span class="pq-tag">Accompagnement familles</span>
+          <span class="pq-tag">Soins & bien-être</span>
+          <span class="pq-tag">Soutien aux aînés</span>
+          <span class="pq-tag">Espaces de travail</span>
+          <span class="pq-tag">Entraide</span>
+          <span class="pq-tag">Culture</span>
+          <span class="pq-tag">Festivals</span>
+          <span class="pq-tag">Événements</span>
+          <span class="pq-tag">Outils partagés</span>
+          <span class="pq-tag">Réparation</span>
+          <span class="pq-tag">Infrastructures</span>
+          <span class="pq-tag">Accueil</span>
+          <span class="pq-tag">Solidarité</span>
+          <span class="pq-tag">Transmission</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 09 HUB VIVANT ── -->
+<section class="hub" id="hub">
+  <div class="wrap">
+    <div class="s-num">09 — Un hub vivant</div>
+    <h2>Un lieu qui attire,<br>accueille et <em>rayonne</em>.</h2>
+    <div class="hub-inner r">
+      <div class="hub-quote">
+        DEMAIN·S n'est pas pensé comme un village fermé. Le village ne se construit pas contre le monde. Il se construit comme une réponse concrète aux besoins du monde.
+      </div>
+      <div class="hub-body">
+        <p>Le domaine a vocation à devenir un <strong>hub régional</strong> : un lieu d'accueil, de passage, de transmission et d'expérimentation — un vrai <strong>tiers-lieu</strong> ancré dans son territoire.</p>
+        <p><strong>DEMAIN·S n'est pas fermé aux gens qui vivent sur place.</strong> Les habitants de la région — villages voisins, agriculteurs, artisans, soignants, enseignants, familles, retraités actifs — peuvent contribuer au projet, utiliser ses infrastructures, participer à sa vie collective, sans nécessairement y habiter.</p>
+        <p>Un médecin du village voisin peut tenir une permanence. Un artisan local peut animer un atelier. Une famille de la région peut amener ses enfants à l'école vivante. Un agriculteur voisin peut vendre sa production au marché du domaine. Une association locale peut organiser un événement.</p>
+        <p>C'est cette porosité avec le territoire qui fait de DEMAIN·S un projet <strong>positif pour la région</strong> — pas une enclave, mais un pôle. Un centre de rencontre, de ressources et d'innovation sociale ouvert à tous.</p>
+        <p>Des familles viendront y vivre. Des visiteurs viendront s'y ressourcer. Des entreprises viendront y organiser des séminaires. Des artistes viendront y créer. Des chercheurs viendront y observer. Et la région entière pourra y trouver quelque chose.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+<!-- ── 10 REJOINDRE ── -->
+<section class="rejoindre" id="rejoindre">
+  <div class="wrap">
+    <div class="s-num">10 — Rejoindre</div>
+    <h2>Appel aux<br><em>porteurs-bâtisseurs</em>.</h2>
+    <div class="rejoin-cols r">
+      <div class="rejoin-left">
+        <h3>Nous construisons le cercle fondateur. Maintenant.</h3>
+        <p>Nous ne cherchons pas seulement des personnes intéressées par l'idée de vivre autrement. Nous cherchons des personnes capables de <strong>contribuer à la mise en place concrète du projet.</strong></p>
+        <p>Des porteurs-bâtisseurs. Des personnes qui veulent prendre en main un pilier. Des personnes qui savent créer, organiser, décider, construire, cultiver, enseigner, soigner, accueillir, réparer, transmettre.</p>
+        <p>Un village ne naît pas d'un plan parfait. Il naît d'un <strong>premier cercle de personnes alignées, compétentes et prêtes à agir.</strong></p>
+        <p style="font-style:italic;color:rgba(245,240,232,.35);font-size:.85rem">Pas d'engagement définitif à ce stade. Juste une première conversation.</p>
+        <div class="rejoin-needs">
+          <h4>Nous avons besoin d'énergies fondatrices pour</h4>
+          <div class="rejoin-tags">
+            <span class="rejoin-tag">Alimentation</span>
+            <span class="rejoin-tag">École</span>
+            <span class="rejoin-tag">Soin</span>
+            <span class="rejoin-tag">Maison de naissance</span>
+            <span class="rejoin-tag">Habitat léger</span>
+            <span class="rejoin-tag">Résidence intergénérationnelle</span>
+            <span class="rejoin-tag">Accueil & gîtes</span>
+            <span class="rejoin-tag">Festivals</span>
+            <span class="rejoin-tag">Culture</span>
+            <span class="rejoin-tag">Agriculture</span>
+            <span class="rejoin-tag">Gouvernance</span>
+            <span class="rejoin-tag">Économie locale</span>
+            <span class="rejoin-tag">Transmission</span>
+            <span class="rejoin-tag">Infrastructures</span>
+            <span class="rejoin-tag">Relations avec le territoire</span>
+          </div>
+        </div>
+        <div class="rejoin-btns">
+          <a href="#form" class="btn-fill">Je veux rejoindre le cercle fondateur</a>
+          <a href="#form" class="btn-outline">Je veux porter un pilier du projet</a>
+          <a href="#form" class="btn-outline">Je souhaite soutenir l'aventure</a>
+        </div>
+      </div>
+
+      <!-- ── 11 FORMULAIRE ── -->
+      <div id="form">
+        <form id="joinForm" onsubmit="go(event)">
+          <div class="field-row">
+            <div class="field"><label>Prénom</label><input placeholder="Jean" required></div>
+            <div class="field"><label>Nom</label><input placeholder="Dupont" required></div>
+          </div>
+          <div class="field"><label>Email</label><input type="email" placeholder="jean@exemple.fr" required></div>
+          <div class="field"><label>Téléphone</label><input type="tel" placeholder="+33 6 …"></div>
+
+          <div class="tags-f">
+            <label>Je viens en tant que</label>
+            <div class="tags">
+              <input type="checkbox" class="ti" id="r1"><label for="r1">Futur habitant</label>
+              <input type="checkbox" class="ti" id="r2"><label for="r2">Famille intéressée</label>
+              <input type="checkbox" class="ti" id="r3"><label for="r3">Porteur de pilier</label>
+              <input type="checkbox" class="ti" id="r4"><label for="r4">Agriculteur / Jardinier</label>
+              <input type="checkbox" class="ti" id="r5"><label for="r5">Éducateur / Formateur</label>
+              <input type="checkbox" class="ti" id="r6"><label for="r6">Artisan / Bâtisseur</label>
+              <input type="checkbox" class="ti" id="r7"><label for="r7">Soignant / Thérapeute</label>
+              <input type="checkbox" class="ti" id="r8"><label for="r8">Sage-femme / Accompagnant naissance</label>
+              <input type="checkbox" class="ti" id="r9"><label for="r9">Entrepreneur</label>
+              <input type="checkbox" class="ti" id="r10"><label for="r10">Cuisinier / Restaurateur</label>
+              <input type="checkbox" class="ti" id="r11"><label for="r11">Artiste / Créatif</label>
+              <input type="checkbox" class="ti" id="r12"><label for="r12">Organisateur d'événements</label>
+              <input type="checkbox" class="ti" id="r13"><label for="r13">Architecte / Designer d'habitat</label>
+              <input type="checkbox" class="ti" id="r14"><label for="r14">Juriste / Gestionnaire</label>
+              <input type="checkbox" class="ti" id="r15"><label for="r15">Mécène</label>
+              <input type="checkbox" class="ti" id="r16"><label for="r16">Partenaire</label>
+              <input type="checkbox" class="ti" id="r17"><label for="r17">Curieux / Soutien</label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Situation familiale</label>
+            <select>
+              <option value="">Sélectionner…</option>
+              <option>Seul·e</option>
+              <option>En couple</option>
+              <option>Famille avec enfants</option>
+              <option>Famille recomposée</option>
+              <option>Groupe / Collectif</option>
+              <option>Autre</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Quel pilier aimeriez-vous contribuer à créer ?</label>
+            <input placeholder="Alimentation, école, soin, habitat, naissance, culture, accueil, gouvernance, festival…">
+          </div>
+
+          <div class="field">
+            <label>Ce qui me motive</label>
+            <textarea placeholder="Parlez-nous librement."></textarea>
+          </div>
+          <div class="field">
+            <label>Ce que je pourrais apporter</label>
+            <textarea placeholder="Compétences, temps, réseau, financement, expérience, énergie…"></textarea>
+          </div>
+          <div class="field">
+            <label>Mes questions</label>
+            <textarea placeholder="Aucune question n'est trop simple."></textarea>
+          </div>
+
+          <button type="submit" class="submit">Envoyer ma candidature →</button>
+          <p class="fnote">Réponse sous 48h. Aucun démarchage.</p>
+        </form>
+        <div class="form-ok" id="formOk">
+          <p>Merci. Votre message est bien reçu.<br>Nous reviendrons vers vous sous 48h<br>pour un premier échange.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="flogo">DEMAIN<span>·S</span></div>
+  <p>
+    Occitanie · Projet pilote de village régénératif<br>
+    300 familles · 500 à 750 personnes estimées<br>
+    Projet sur 20 ans maximum, avec possibilité de renégociation pour assurer la continuité<br>
+    <span style="opacity:.5">Informations non contractuelles. Projections indicatives. Modèle en cours de structuration.</span>
+  </p>
+</footer>
+
+<script>
+  // Cursor
+  const cur = document.getElementById('cur');
+  const curR = document.getElementById('curR');
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cur.style.left=mx+'px'; cur.style.top=my+'px'; });
+  (function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; curR.style.left=rx+'px'; curR.style.top=ry+'px'; requestAnimationFrame(loop); })();
+
+  // Reveals
+  const io = new IntersectionObserver(els => els.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), {threshold:.08});
+  document.querySelectorAll('.r').forEach(el => io.observe(el));
+
+  // Form → Google Sheets
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzCNX0diiC2wfX4ZEQIzmlO83lu3LxSG5T0Ha4PDgsHGRm1tLelRqB7iCdQaQxDnIek/exec';
+
+  function go(e) {
+    e.preventDefault();
+    const form = document.getElementById('joinForm');
+    const btn = form.querySelector('.submit');
+    btn.textContent = 'Envoi en cours…';
+    btn.disabled = true;
+
+    // Collect checked roles
+    const roles = [...form.querySelectorAll('.ti:checked')].map(i => i.nextElementSibling.textContent).join(', ');
+
+    const data = {
+      prenom:     form.querySelector('input[placeholder="Jean"]').value,
+      nom:        form.querySelector('input[placeholder="Dupont"]').value,
+      email:      form.querySelector('input[type="email"]').value,
+      tel:        form.querySelector('input[type="tel"]').value,
+      role:       roles,
+      situation:  form.querySelectorAll('select')[0].value,
+      pilier:     form.querySelector('input[placeholder*="Alimentation"]').value,
+      motivation: form.querySelectorAll('textarea')[0].value,
+      apport:     form.querySelectorAll('textarea')[1].value,
+      questions:  form.querySelectorAll('textarea')[2].value,
+    };
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(() => {
+      form.style.display = 'none';
+      document.getElementById('formOk').style.display = 'block';
+    }).catch(() => {
+      form.style.display = 'none';
+      document.getElementById('formOk').style.display = 'block';
+    });
+  }
+</script>
+</body>
+</html>
