@@ -57,7 +57,7 @@
     .hero { height:100vh; min-height:720px; display:flex; flex-direction:column; justify-content:flex-end; padding:0 48px 88px; position:relative; overflow:hidden; }
     .hero-bg { position:absolute; inset:0; background:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80') center/cover; filter:brightness(.25) saturate(.5); }
     .hero-line { position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg,transparent,var(--or),transparent); opacity:.35; }
-    .hero-content { position:relative; z-index:2; max-width:1100px; }
+    .hero-content { position:relative; z-index:2; max-width:1100px; padding-top:80px; }
     .eyebrow-sm { font-size:.68rem; letter-spacing:.22em; text-transform:uppercase; color:var(--or); margin-bottom:26px; display:flex; align-items:center; gap:14px; }
     .eyebrow-sm::before { content:''; display:block; width:36px; height:1px; background:var(--or); }
     .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.8rem,6vw,5.5rem); line-height:1.03; font-weight:300; letter-spacing:-.02em; margin-bottom:20px; }
@@ -65,7 +65,7 @@
     .hero-sub { font-size:clamp(.9rem,1.5vw,1.1rem); font-weight:300; color:rgba(245,240,232,.55); line-height:1.75; max-width:640px; margin-bottom:16px; }
     .hero-sub strong { color:rgba(245,240,232,.85); font-weight:400; }
     .hero-note { font-size:.82rem; font-weight:300; color:rgba(245,240,232,.38); line-height:1.7; max-width:580px; margin-bottom:44px; font-style:italic; }
-    .hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+    .hero-btns { display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:660px; }
     .btn-fill { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; background:var(--or); padding:14px 26px; color:var(--noir); text-decoration:none; font-weight:500; border-radius:2px; transition:all .3s; border:1px solid var(--or); }
     .btn-fill:hover { background:var(--or-v); border-color:var(--or-v); }
     .btn-outline { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; border:1px solid rgba(245,240,232,.22); padding:14px 26px; color:var(--blanc); text-decoration:none; transition:all .3s; border-radius:2px; }
@@ -103,10 +103,14 @@
 
     /* LIEU */
     .lieu-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gris2); margin-top:56px; }
+    .lieu-photos { grid-column:1; display:grid; grid-template-rows:1fr 1fr; gap:1px; background:var(--gris2); }
     .lieu-img { height:520px; overflow:hidden; }
+    .lieu-img.half { height:259px; }
     .lieu-img img { width:100%; height:100%; object-fit:cover; filter:saturate(.65) brightness(.8); transition:transform .8s; }
     .lieu-img:hover img { transform:scale(1.04); }
     .lieu-info { background:var(--noir); padding:48px; display:flex; flex-direction:column; justify-content:space-between; }
+    .photo-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--gris2); margin-top:1px; }
+    .photo-strip .lieu-img { height:300px; }
     .lieu-info h3 { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:300; line-height:1.35; margin-bottom:28px; }
     .lieu-stat { display:flex; justify-content:space-between; align-items:baseline; padding:15px 0; border-bottom:1px solid var(--gris2); }
     .lieu-stat:last-of-type { border-bottom:none; }
@@ -330,6 +334,76 @@
   <div class="band-item r r3"><div class="band-n">20 ans</div><div class="band-label">maximum<br>avec renégociation</div></div>
 </div>
 
+<!-- ── 01 VISION ── -->
+<section class="vision" id="vision">
+  <div class="wrap">
+    <div class="s-num">01 — Vision</div>
+    <h2>Imaginez un endroit où<br>vous <em>appartenez</em> vraiment.</h2>
+    <div class="vision-cols r">
+      <div class="vision-quote">
+        Votre maison est un sanctuaire. Vous vivez dans un lieu où la nature, les autres, le travail, l'éducation, la nourriture, le soin et la culture ne sont plus séparés. Vous n'habitez pas seulement quelque part. Vous participez à une communauté vivante.
+      </div>
+      <div class="vision-body">
+        <p>DEMAIN·S est un projet pionnier de village régénératif en Occitanie. Un lieu où l'argent, le temps et les compétences des habitants servent à produire des biens communs : <strong>nourriture, éducation, soins, culture, accueil, infrastructures, solidarité, bien-être.</strong></p>
+        <p>Un lieu où la contribution à la communauté permet de créer une qualité de vie supérieure, accessible, mutualisée — avec des services disponibles <strong>au prix coûtant, à prix réduit, ou gratuitement</strong> selon les choix collectifs.</p>
+        <p>Mais DEMAIN·S n'est pas seulement un lieu de vie. C'est aussi un lieu de création. Il y aura mille choses à faire : produire de la nourriture, créer une école, imaginer une maison de naissance, accueillir des personnes âgées, organiser des festivals, développer des retraites, ouvrir des résidences d'artistes, construire des habitats légers, transmettre des savoirs, prendre soin du vivant.</p>
+        <p>Pour contrebalancer la vie en habitat léger et créer une qualité de vie réelle, des <strong>lieux communs de confort et de culture</strong> seront au cœur du village : salle de spectacle et cinéma en plein air, sauna collectif, bains, espace bien-être, bibliothèque, atelier arts, salle de musique, terrain de sport. L'habitat est sobre — la vie commune est riche.</p>
+        <p><em>Un laboratoire vivant. Un hub ouvert. Un village à construire.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="height:400px;overflow:hidden;position:relative;">
+  <img src="photos/photo-infrastructure.png" alt="Infrastructures du village" style="width:100%;height:100%;object-fit:cover;filter:saturate(.6) brightness(.75);">
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:48px;text-align:center;">
+    <p style="font-family:'Playfair Display',serif;font-size:clamp(1.2rem,2vw,1.7rem);font-style:italic;color:rgba(245,240,232,.9);max-width:680px;line-height:1.6;">« Un village qui existe déjà — il s'agit de le rendre vivant. »</p>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ── 02 LE LIEU ── -->
+<section id="lieu">
+  <div class="wrap">
+    <div class="s-num">02 — Le lieu</div>
+    <h2>Un domaine d'exception<br>en <em>Occitanie</em>.</h2>
+    <div class="lieu-grid r">
+      <div class="lieu-photos">
+        <div class="lieu-img half">
+          <img src="photos/photo-paysage-village.png" alt="Vue du domaine en Occitanie">
+        </div>
+        <div class="lieu-img half">
+          <img src="photos/photo-village-path.png" alt="Le village, ses sentiers et tiny houses">
+        </div>
+      </div>
+      <div class="lieu-info">
+        <div>
+          <h3>À environ 45 minutes<br>de Montpellier</h3>
+          <div class="lieu-stat"><span class="lieu-stat-l">Surface bâtie existante</span><span class="lieu-stat-v">5 000 m²</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Terrain total</span><span class="lieu-stat-v">880 hectares</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Vignobles en production</span><span class="lieu-stat-v">8 hectares</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Cultures existantes</span><span class="lieu-stat-v">110 hectares</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Équipements</span><span class="lieu-stat-v">Bâti · Gîtes · Piscines · Tennis</span></div>
+          <div class="lieu-stat"><span class="lieu-stat-l">Horizon du projet</span><span class="lieu-stat-v">20 ans maximum</span></div>
+        </div>
+        <div class="lieu-note">
+          Le domaine est déjà vivant — bâti, terres cultivées, vignes, gîtes. Cette base permet de ne pas partir d'une page blanche. Mais DEMAIN·S est avant tout un <strong style="color:rgba(245,240,232,.7);font-style:normal">prototype de village en habitat léger</strong> : la très grande majorité des habitants vivront dans des tiny houses, cabanes, yourtes et structures légères et réversibles, intégrées avec soin dans le paysage. Les 5 000 m² de bâti accueillent les espaces collectifs et quelques logements. L'habitat léger est le modèle central. L'objectif n'est pas de bétonner — c'est d'habiter une petite fraction des 880 hectares, tout en régénérant l'ensemble.
+          <br><br>
+          <em>Le lieu exact est en cours de validation avec les autorités locales. Nous le révélerons dès que le cadre administratif est posé. Les candidats retenus dans le cercle fondateur y auront accès en priorité.</em>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="photo-strip r">
+    <div class="lieu-img"><img src="photos/photo-repas-communautaire.png" alt="Dîner communautaire en plein air"></div>
+    <div class="lieu-img"><img src="photos/photo-atelier.png" alt="Atelier collectif au village"></div>
+    <div class="lieu-img"><img src="photos/photo-repas-vigne.png" alt="Soirée conviviale au domaine"></div>
+  </div>
+</section>
+
+<hr class="div">
+
 <!-- ── CLARIFICATIONS ── -->
 <section style="background:var(--gris1);padding:80px 48px;">
   <div class="wrap">
@@ -355,60 +429,6 @@
         <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:300;color:var(--or);line-height:1;margin-bottom:16px">04</div>
         <h4 style="font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blanc);margin-bottom:12px">Des infrastructures communes légères</h4>
         <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300">Le village ne sera pas une juxtaposition de tiny houses isolées. Des infrastructures communes sobres et légères sont prévues : blocs sanitaires, douches, points d'eau, électricité, espaces techniques — en bois, réseaux visibles, robustes et réversibles. Sobre, pas précaire.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="div">
-
-
-<!-- ── 01 VISION ── -->
-<section class="vision" id="vision">
-  <div class="wrap">
-    <div class="s-num">01 — Vision</div>
-    <h2>Imaginez un endroit où<br>vous <em>appartenez</em> vraiment.</h2>
-    <div class="vision-cols r">
-      <div class="vision-quote">
-        Votre maison est un sanctuaire. Vous vivez dans un lieu où la nature, les autres, le travail, l'éducation, la nourriture, le soin et la culture ne sont plus séparés. Vous n'habitez pas seulement quelque part. Vous participez à une communauté vivante.
-      </div>
-      <div class="vision-body">
-        <p>DEMAIN·S est un projet pionnier de village régénératif en Occitanie. Un lieu où l'argent, le temps et les compétences des habitants servent à produire des biens communs : <strong>nourriture, éducation, soins, culture, accueil, infrastructures, solidarité, bien-être.</strong></p>
-        <p>Un lieu où la contribution à la communauté permet de créer une qualité de vie supérieure, accessible, mutualisée — avec des services disponibles <strong>au prix coûtant, à prix réduit, ou gratuitement</strong> selon les choix collectifs.</p>
-        <p>Mais DEMAIN·S n'est pas seulement un lieu de vie. C'est aussi un lieu de création. Il y aura mille choses à faire : produire de la nourriture, créer une école, imaginer une maison de naissance, accueillir des personnes âgées, organiser des festivals, développer des retraites, ouvrir des résidences d'artistes, construire des habitats légers, transmettre des savoirs, prendre soin du vivant.</p>
-        <p>Pour contrebalancer la vie en habitat léger et créer une qualité de vie réelle, des <strong>lieux communs de confort et de culture</strong> seront au cœur du village : salle de spectacle et cinéma en plein air, sauna collectif, bains, espace bien-être, bibliothèque, atelier arts, salle de musique, terrain de sport. L'habitat est sobre — la vie commune est riche.</p>
-        <p><em>Un laboratoire vivant. Un hub ouvert. Un village à construire.</em></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="div">
-
-<!-- ── 02 LE LIEU ── -->
-<section id="lieu">
-  <div class="wrap">
-    <div class="s-num">02 — Le lieu</div>
-    <h2>Un domaine d'exception<br>en <em>Occitanie</em>.</h2>
-    <div class="lieu-grid r">
-      <div class="lieu-img">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1200&q=80" alt="Domaine Occitanie">
-      </div>
-      <div class="lieu-info">
-        <div>
-          <h3>À environ 45 minutes<br>de Montpellier</h3>
-          <div class="lieu-stat"><span class="lieu-stat-l">Surface bâtie existante</span><span class="lieu-stat-v">5 000 m²</span></div>
-          <div class="lieu-stat"><span class="lieu-stat-l">Terrain total</span><span class="lieu-stat-v">880 hectares</span></div>
-          <div class="lieu-stat"><span class="lieu-stat-l">Vignobles en production</span><span class="lieu-stat-v">8 hectares</span></div>
-          <div class="lieu-stat"><span class="lieu-stat-l">Cultures existantes</span><span class="lieu-stat-v">110 hectares</span></div>
-          <div class="lieu-stat"><span class="lieu-stat-l">Équipements</span><span class="lieu-stat-v">Bâti · Gîtes · Piscines · Tennis</span></div>
-          <div class="lieu-stat"><span class="lieu-stat-l">Horizon du projet</span><span class="lieu-stat-v">20 ans maximum</span></div>
-        </div>
-        <div class="lieu-note">
-          Le domaine est déjà vivant — bâti, terres cultivées, vignes, gîtes. Cette base permet de ne pas partir d'une page blanche. Mais DEMAIN·S est avant tout un <strong style="color:rgba(245,240,232,.7);font-style:normal">prototype de village en habitat léger</strong> : la très grande majorité des habitants vivront dans des tiny houses, cabanes, yourtes et structures légères et réversibles, intégrées avec soin dans le paysage. Les 5 000 m² de bâti accueillent les espaces collectifs et quelques logements. L'habitat léger est le modèle central. L'objectif n'est pas de bétonner — c'est d'habiter une petite fraction des 880 hectares, tout en régénérant l'ensemble.
-          <br><br>
-          <em>Le lieu exact est en cours de validation avec les autorités locales. Nous le révélerons dès que le cadre administratif est posé. Les candidats retenus dans le cercle fondateur y auront accès en priorité.</em>
-        </div>
       </div>
     </div>
   </div>
