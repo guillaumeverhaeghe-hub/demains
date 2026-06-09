@@ -4,6 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DEMAIN·S — Un village du futur, maintenant</title>
+  <meta name="description" content="Un village régénératif de 300 familles en Occitanie. Habitat léger, biens communs, gouvernance partagée. Appel aux porteurs-bâtisseurs.">
+  <!-- Open Graph -->
+  <meta property="og:title" content="DEMAIN·S — Un village du futur, maintenant">
+  <meta property="og:description" content="Un village régénératif de 300 familles en Occitanie. Habitat léger, biens communs, gouvernance partagée. Appel aux porteurs-bâtisseurs.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80">
+  <meta property="og:url" content="https://guillaumeverhaeghe-hub.github.io/demains">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DEMAIN·S — Un village du futur, maintenant">
+  <meta name="twitter:description" content="Un village régénératif de 300 familles en Occitanie. Habitat léger, biens communs, gouvernance partagée.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap');
 
@@ -56,7 +69,8 @@
     .btn-fill { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; background:var(--or); padding:14px 26px; color:var(--noir); text-decoration:none; font-weight:500; border-radius:2px; transition:all .3s; border:1px solid var(--or); }
     .btn-fill:hover { background:var(--or-v); border-color:var(--or-v); }
     .btn-outline { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; border:1px solid rgba(245,240,232,.22); padding:14px 26px; color:var(--blanc); text-decoration:none; transition:all .3s; border-radius:2px; }
-    .btn-outline:hover { border-color:var(--or); color:var(--or); }
+    .btn-outline:hover { background:var(--or); border-color:var(--or); color:var(--noir); }
+    .btn-outline.active { background:var(--or); border-color:var(--or); color:var(--noir); }
     .scroll-indicator { position:absolute; bottom:32px; right:48px; font-size:.64rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gris-t); display:flex; flex-direction:column; align-items:center; gap:8px; z-index:2; }
     .scroll-line { width:1px; height:44px; background:linear-gradient(to bottom,var(--or),transparent); animation:drop 2s infinite; }
     @keyframes drop { 0%,100%{opacity:1}50%{opacity:.3} }
@@ -228,6 +242,17 @@
     .flogo span { color:var(--or); }
     footer p { font-size:.7rem; letter-spacing:.05em; color:var(--gris-t); font-weight:300; line-height:1.75; text-align:right; max-width:480px; }
 
+    /* INTER-CTA */
+    .inter-cta { border-top:1px solid var(--gris2); border-bottom:1px solid var(--gris2); padding:28px 48px; display:flex; justify-content:space-between; align-items:center; background:var(--noir); }
+    .inter-cta p { font-size:.88rem; color:rgba(245,240,232,.45); font-weight:300; font-style:italic; }
+    .inter-cta .btns { display:flex; gap:10px; flex-shrink:0; }
+    .inter-cta .btn-fill { font-size:.68rem; }
+    .inter-cta .btn-outline { font-size:.68rem; }
+    @media(max-width:960px) {
+      .inter-cta { flex-direction:column; gap:16px; padding:24px; }
+      .inter-cta p { text-align:center; }
+    }
+
     /* REVEALS */
     .r { opacity:0; transform:translateY(22px); transition:opacity .85s ease, transform .85s ease; }
     .r.in { opacity:1; transform:none; }
@@ -277,8 +302,7 @@
     <div class="eyebrow-sm">Prototype · Habitat léger · Village régénératif · Occitanie</div>
     <h1>Village <em>habitat léger</em>,<br>maintenant.</h1>
     <p class="hero-sub">
-      Un domaine de <strong>880 hectares</strong> en Occitanie — avec 5 000 m² de bâti existant comme base de départ,
-      mais la <strong>grande majorité du village sera en habitat léger</strong> : tiny houses, cabanes, yourtes, structures légères et réversibles.
+      Un domaine de <strong>880 hectares</strong> en Occitanie — avec 5 000 m² de bâti existant comme base de départ, mais la <strong>grande majorité du village sera en habitat léger</strong> : tiny houses, cabanes, yourtes, structures légères et réversibles.
       Objectif : un village régénératif de <strong>300 familles</strong> (500 à 750 personnes), positif pour la région.
     </p>
     <p class="hero-note">
@@ -290,7 +314,7 @@
     <div class="hero-btns">
       <a href="#rejoindre" class="btn-fill">Je rejoins le cercle fondateur</a>
       <a href="#piliers" class="btn-outline">Je veux porter un pilier</a>
-      <a href="#rejoindre" class="btn-outline">Je souhaite soutenir l'aventure</a>
+      <a href="#form" class="btn-outline">Je souhaite soutenir l'aventure</a>
     </div>
   </div>
   <div class="scroll-indicator"><span>Défiler</span><div class="scroll-line"></div></div>
@@ -305,6 +329,39 @@
   <div class="band-item r r3"><div class="band-n">20 ans</div><div class="band-label">maximum<br>avec renégociation</div></div>
 </div>
 
+<!-- ── CLARIFICATIONS ── -->
+<section style="background:var(--gris1);padding:80px 48px;">
+  <div class="wrap">
+    <div class="s-num">À savoir avant tout</div>
+    <h2>4 points à comprendre<br>dès le <em>départ</em>.</h2>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--gris2);margin-top:48px">
+      <div style="background:var(--gris1);padding:36px 32px;">
+        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:300;color:var(--or);line-height:1;margin-bottom:16px">01</div>
+        <h4 style="font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blanc);margin-bottom:12px">Le cadre de 20 ans n'est pas une fin</h4>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300">20 ans, c'est un horizon de départ — rassurant pour les collectivités, cohérent avec l'habitat léger. Si le projet démontre son utilité et son intégration locale, il pourra être prolongé, transformé ou pérennisé. Ce n'est pas une date d'expulsion.</p>
+      </div>
+      <div style="background:var(--gris1);padding:36px 32px;">
+        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:300;color:var(--or);line-height:1;margin-bottom:16px">02</div>
+        <h4 style="font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blanc);margin-bottom:12px">Vous apportez votre propre habitat</h4>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300">DEMAIN·S ne fournit pas de logements clés en main. Chaque habitant vient avec son propre habitat léger — tiny house, cabane, yourte, module démontable ou autre solution validée. Le projet fournit l'emplacement, les infrastructures communes et le cadre collectif.</p>
+      </div>
+      <div style="background:var(--gris1);padding:36px 32px;">
+        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:300;color:var(--or);line-height:1;margin-bottom:16px">03</div>
+        <h4 style="font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blanc);margin-bottom:12px">La contribution ≠ un loyer</h4>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300">La contribution mensuelle n'est pas un loyer. Elle finance l'accès au projet, les infrastructures communes, la gouvernance et les services collectifs. Le statut exact de l'emplacement — inclus dans la contribution ou avec options payantes selon raccordement — est en cours d'arbitrage juridique.</p>
+      </div>
+      <div style="background:var(--gris1);padding:36px 32px;">
+        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:300;color:var(--or);line-height:1;margin-bottom:16px">04</div>
+        <h4 style="font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--blanc);margin-bottom:12px">Des infrastructures communes légères</h4>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300">Le village ne sera pas une juxtaposition de tiny houses isolées. Des infrastructures communes sobres et légères sont prévues : blocs sanitaires, douches, points d'eau, électricité, espaces techniques — en bois, réseaux visibles, robustes et réversibles. Sobre, pas précaire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="div">
+
+
 <!-- ── 01 VISION ── -->
 <section class="vision" id="vision">
   <div class="wrap">
@@ -318,6 +375,7 @@
         <p>DEMAIN·S est un projet pionnier de village régénératif en Occitanie. Un lieu où l'argent, le temps et les compétences des habitants servent à produire des biens communs : <strong>nourriture, éducation, soins, culture, accueil, infrastructures, solidarité, bien-être.</strong></p>
         <p>Un lieu où la contribution à la communauté permet de créer une qualité de vie supérieure, accessible, mutualisée — avec des services disponibles <strong>au prix coûtant, à prix réduit, ou gratuitement</strong> selon les choix collectifs.</p>
         <p>Mais DEMAIN·S n'est pas seulement un lieu de vie. C'est aussi un lieu de création. Il y aura mille choses à faire : produire de la nourriture, créer une école, imaginer une maison de naissance, accueillir des personnes âgées, organiser des festivals, développer des retraites, ouvrir des résidences d'artistes, construire des habitats légers, transmettre des savoirs, prendre soin du vivant.</p>
+        <p>Pour contrebalancer la vie en habitat léger et créer une qualité de vie réelle, des <strong>lieux communs de confort et de culture</strong> seront au cœur du village : salle de spectacle et cinéma en plein air, sauna collectif, bains, espace bien-être, bibliothèque, atelier arts, salle de musique, terrain de sport. L'habitat est sobre — la vie commune est riche.</p>
         <p><em>Un laboratoire vivant. Un hub ouvert. Un village à construire.</em></p>
       </div>
     </div>
@@ -347,6 +405,8 @@
         </div>
         <div class="lieu-note">
           Le domaine est déjà vivant — bâti, terres cultivées, vignes, gîtes. Cette base permet de ne pas partir d'une page blanche. Mais DEMAIN·S est avant tout un <strong style="color:rgba(245,240,232,.7);font-style:normal">prototype de village en habitat léger</strong> : la très grande majorité des habitants vivront dans des tiny houses, cabanes, yourtes et structures légères et réversibles, intégrées avec soin dans le paysage. Les 5 000 m² de bâti accueillent les espaces collectifs et quelques logements. L'habitat léger est le modèle central. L'objectif n'est pas de bétonner — c'est d'habiter une petite fraction des 880 hectares, tout en régénérant l'ensemble.
+          <br><br>
+          <em>Le lieu exact est en cours de validation avec les autorités locales. Nous le révélerons dès que le cadre administratif est posé. Les candidats retenus dans le cercle fondateur y auront accès en priorité.</em>
         </div>
       </div>
     </div>
@@ -354,6 +414,15 @@
 </section>
 
 <hr class="div">
+
+<!-- INTER-CTA 1 -->
+<div class="inter-cta">
+  <p>Convaincu·e par la vision ? Le cercle fondateur se constitue maintenant.</p>
+  <div class="btns">
+    <a href="#form" class="btn-fill" style="font-size:.68rem;padding:11px 20px">Rejoindre le projet</a>
+    <a href="#form" class="btn-outline" style="font-size:.68rem;padding:11px 20px">Être tenu·e informé·e</a>
+  </div>
+</div>
 
 <!-- ── 03 MODÈLE DE VIE ── -->
 <section class="modele" id="modele">
@@ -384,13 +453,13 @@
         </div>
         <div class="m-two">
           <div class="m-box">
-            <div class="big">200€</div>
-            <p>/ mois supplémentaires<br><span class="or">250 pers. × 200€ × 12 = 600 000 €/an</span></p>
+            <div class="big">300 €</div>
+            <p>/ mois supplémentaires<br><span class="or">250 pers. × 300 € × 12 = 900 000 €/an</span></p>
           </div>
           <div class="m-sep">ou</div>
           <div class="m-box">
             <div class="big">20%</div>
-            <p>du temps<br>1 jour / semaine au service du village</p>
+            <p>du temps (1 jour/sem.)<br><span class="or" style="font-size:.75rem">≈ équivalent de 300 €/mois</span></p>
           </div>
         </div>
       </div>
@@ -404,8 +473,8 @@
           </div>
         </div>
         <div class="m-box" style="margin-bottom:22px">
-          <div class="big">1 200 000 €</div>
-          <p>par an en contributions financières</p>
+          <div class="big">1 500 000 €</div>
+          <p>par an en contributions financières<br><span style="font-size:.75rem;color:rgba(245,240,232,.4)">(600k base + 900k renforcé)</span></p>
         </div>
         <div class="m-item">
           <div class="m-n">·</div>
@@ -518,6 +587,15 @@
 
 <hr class="div">
 
+<!-- INTER-CTA 2 -->
+<div class="inter-cta">
+  <p>Vous avez une compétence à apporter ? Un pilier à porter ?</p>
+  <div class="btns">
+    <a href="#form" class="btn-fill" style="font-size:.68rem;padding:11px 20px">Rejoindre le projet</a>
+    <a href="#form" class="btn-outline" style="font-size:.68rem;padding:11px 20px">Être tenu·e informé·e</a>
+  </div>
+</div>
+
 <!-- ── 05 GOUVERNANCE ── -->
 <section class="gouv" id="gouvernance">
   <div class="wrap">
@@ -626,6 +704,15 @@
 
 <hr class="div">
 
+<!-- INTER-CTA 3 -->
+<div class="inter-cta">
+  <p>Intéressé·e par la gouvernance ou la structure du projet ?</p>
+  <div class="btns">
+    <a href="#form" class="btn-fill" style="font-size:.68rem;padding:11px 20px">Rejoindre le projet</a>
+    <a href="#form" class="btn-outline" style="font-size:.68rem;padding:11px 20px">Être tenu·e informé·e</a>
+  </div>
+</div>
+
 <!-- ── 07 ÉCONOMIE ── -->
 <section class="eco" id="economics">
   <div class="wrap">
@@ -637,8 +724,8 @@
           <h3>Contributions annuelles estimées</h3>
           <div class="eco-table">
             <div class="eco-row"><span class="l">Contribution de base (500 × 100€ × 12)</span><span class="v">600 000 €</span></div>
-            <div class="eco-row"><span class="l">Contribution renforcée argent (250 × 200€ × 12)</span><span class="v">600 000 €</span></div>
-            <div class="eco-row tot"><span class="l">Total contributions financières / an</span><span class="v">1 200 000 €</span></div>
+            <div class="eco-row"><span class="l">Contribution renforcée argent (250 × 300€ × 12)</span><span class="v">900 000 €</span></div>
+            <div class="eco-row tot"><span class="l">Total contributions financières / an</span><span class="v">1 500 000 €</span></div>
             <div class="eco-row"><span class="l">Contribution en temps (250 × 52 jours)</span><span class="v">13 000 j/h</span></div>
             <div class="eco-row tot"><span class="l">Équivalent temps plein</span><span class="v">50–60 ETP</span></div>
           </div>
@@ -664,7 +751,7 @@
       </div>
       <div class="eco-right">
         <h3>La vraie force du modèle : le temps.</h3>
-        <p>Avec 1 200 000 € de contributions financières annuelles, le projet couvre une base importante de fonctionnement. Mais la vraie puissance réside dans les <strong>13 000 journées-hommes disponibles par an.</strong></p>
+        <p>Avec 1 500 000 € de contributions financières annuelles, le projet couvre une base importante de fonctionnement. Mais la vraie puissance réside dans les <strong>13 000 journées-hommes disponibles par an.</strong></p>
         <p>Cette force de travail permet de produire en interne, de réduire les coûts, d'améliorer le lieu en continu et de développer des activités génératrices de revenus.</p>
         <p>Les revenus des activités extérieures — hébergements, événements, agriculture, formations — ne remplacent pas la contribution des habitants. Ils la <strong>renforcent.</strong></p>
         <div class="eco-highlight">
@@ -672,10 +759,14 @@
           <p>équivalents temps plein<br>au service de la communauté chaque année</p>
         </div>
         <div class="eco-sub">
-          <div class="num2">1 200 000 €</div>
-          <p>de contributions financières annuelles<br>pour couvrir le fonctionnement et investir en continu</p>
+          <div class="num2">1 500 000 €</div>
+          <p>de contributions financières annuelles<br>soit +370 000 € au-delà des charges indicatives</p>
         </div>
-        <p style="font-size:.82rem;color:rgba(245,240,232,.32);font-style:italic;line-height:1.7">Le modèle juridique, économique et communautaire est en cours de structuration. Ces chiffres sont des projections indicatives, révisables par la communauté.</p>
+        <p style="font-size:.82rem;color:rgba(245,240,232,.32);font-style:italic;line-height:1.7">Le modèle juridique, économique et communautaire est en cours de structuration. Ces chiffres sont des projections indicatives.</p>
+        <div style="border:1px solid var(--or);border-radius:2px;padding:22px;margin-top:16px;font-size:.88rem;line-height:1.72;color:rgba(245,240,232,.6)">
+          <strong style="color:var(--or);display:block;margin-bottom:8px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase">Qui décide de l'allocation du budget ?</strong>
+          Le cadre de base — constitution, infrastructures communes, contributions minimales — est défini collectivement à la fondation et rendu transparent. Tout ce qui dépasse ce socle est décidé par la communauté elle-même, via ses outils de gouvernance. La majorité du budget appartient à la communauté.
+        </div>
       </div>
     </div>
   </div>
@@ -723,6 +814,15 @@
 
 <hr class="div">
 
+<!-- INTER-CTA 4 -->
+<div class="inter-cta">
+  <p>Le modèle économique vous parle ? Envie d'en discuter ?</p>
+  <div class="btns">
+    <a href="#form" class="btn-fill" style="font-size:.68rem;padding:11px 20px">Rejoindre le projet</a>
+    <a href="#form" class="btn-outline" style="font-size:.68rem;padding:11px 20px">Être tenu·e informé·e</a>
+  </div>
+</div>
+
 <!-- ── 09 HUB VIVANT ── -->
 <section class="hub" id="hub">
   <div class="wrap">
@@ -745,6 +845,94 @@
 
 <hr class="div">
 
+<!-- ── FAQ ── -->
+<section style="background:var(--sombre);padding:112px 48px;" id="faq">
+  <div class="wrap">
+    <div class="s-num">Questions fréquentes</div>
+    <h2>Les objections<br><em>honnêtement</em> traitées.</h2>
+    <div style="display:flex;flex-direction:column;gap:0;margin-top:56px;border:1px solid var(--gris2)">
+
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:28px 32px;border-bottom:1px solid var(--gris2);cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:300">Peut-on vraiment installer de l'habitat léger légalement ?</h4>
+          <span style="color:var(--or);font-size:1.4rem;flex-shrink:0;margin-left:20px">+</span>
+        </div>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300;margin-top:16px;display:none">C'est le point central à valider avant toute promesse publique. Le projet cible des structures légères, réversibles et progressives. Les règles d'urbanisme dépendent de la commune et des zones. C'est précisément pourquoi nous travaillons avec la municipalité en amont — et pourquoi nous ne promettons rien d'irréversible.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:28px 32px;border-bottom:1px solid var(--gris2);cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:300">300 familles, c'est énorme. Est-ce réaliste ?</h4>
+          <span style="color:var(--or);font-size:1.4rem;flex-shrink:0;margin-left:20px">+</span>
+        </div>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300;margin-top:16px;display:none">C'est une ambition progressive, pas un point de départ. La séquence réelle : <strong style="color:rgba(245,240,232,.7);font-weight:400">Phase 1 — 20 à 30 foyers fondateurs.</strong> Phase 2 — 80 à 150 familles, avec les premiers piliers opérationnels. Phase 3 — 300 familles sur 15 à 20 ans. Chaque étape est conditionnée à la capacité réelle du projet : gouvernance stable, lieu validé, modèle économique fonctionnel. On ne grandit pas plus vite que ce qu'on peut bien intégrer.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:28px 32px;border-bottom:1px solid var(--gris2);cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:300">N'est-ce pas une communauté fermée, une enclave ?</h4>
+          <span style="color:var(--or);font-size:1.4rem;flex-shrink:0;margin-left:20px">+</span>
+        </div>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300;margin-top:16px;display:none">Non. Le projet est pensé comme un hub territorial ouvert. Les habitants des villages voisins peuvent utiliser les services, participer aux événements, contribuer aux piliers. Des agriculteurs, artisans, soignants et associations locaux peuvent y être partenaires. L'objectif est d'être utile à la région, pas de s'en isoler.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:28px 32px;border-bottom:1px solid var(--gris2);cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:300">Le travail communautaire, c'est légal ?</h4>
+          <span style="color:var(--or);font-size:1.4rem;flex-shrink:0;margin-left:20px">+</span>
+        </div>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300;margin-top:16px;display:none">La contribution en temps doit être juridiquement cadrée et librement choisie. Ce n'est ni du travail dissimulé, ni de l'exploitation. Le cadre exact — bénévolat, coopérative, association, autre statut — est en cours de structuration avec des experts juridiques.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:28px 32px;border-bottom:1px solid var(--gris2);cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:300">Et si je construis ma tiny house et que le projet s'arrête ?</h4>
+          <span style="color:var(--or);font-size:1.4rem;flex-shrink:0;margin-left:20px">+</span>
+        </div>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300;margin-top:16px;display:none">L'habitat léger est par définition démontable et déplaçable. C'est une protection, pas une contrainte. La constitution définira clairement les droits, les règles de sortie et les conditions de prolongation. L'objectif des 20 ans est précisément de ne jamais créer une situation irréversible pour les habitants.</p>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)" style="padding:28px 32px;cursor:pointer;">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <h4 style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:300">Le modèle économique est-il vraiment viable ?</h4>
+          <span style="color:var(--or);font-size:1.4rem;flex-shrink:0;margin-left:20px">+</span>
+        </div>
+        <p style="font-size:.88rem;line-height:1.75;color:rgba(245,240,232,.5);font-weight:300;margin-top:16px;display:none">Les chiffres présentés sont des ordres de grandeur indicatifs — ils servent à tester la cohérence, pas à promettre un résultat. Le modèle sera affiné pilier par pilier, avec un budget V1 prudent. La vraie robustesse vient de la combinaison : contributions financières + temps collectif + revenus des activités existantes du domaine.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── RÔLES ── -->
+<section style="background:var(--noir);padding:112px 48px;" id="roles">
+  <div class="wrap">
+    <div class="s-num">Les rôles dans le projet</div>
+    <h2>Deux rôles,<br>une même <em>vision</em>.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gris2);margin-top:56px">
+      <div style="background:var(--noir);padding:48px">
+        <div style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--or);margin-bottom:20px">Rôle 1</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:300;margin-bottom:20px">Le Cercle<br>Fondateur</h3>
+        <p style="font-size:.92rem;line-height:1.82;color:rgba(245,240,232,.55);font-weight:300;margin-bottom:16px">Les membres du cercle fondateur <strong style="color:rgba(245,240,232,.85);font-weight:400">posent les bases du projet</strong> : ils définissent la constitution, choisissent le lieu, structurent la gouvernance, et prennent les premières décisions collectives avant l'arrivée des autres habitants.</p>
+        <p style="font-size:.92rem;line-height:1.82;color:rgba(245,240,232,.55);font-weight:300;margin-bottom:24px">Ils ne gèrent pas forcément un pilier opérationnel. Leur rôle est stratégique et fondateur. Ce sont eux qui rendent le village possible.</p>
+        <div style="border:1px solid var(--gris2);padding:18px 22px;font-size:.82rem;color:rgba(245,240,232,.4);line-height:1.65">Engagement : disponibilité pour les décisions fondatrices, participation aux réunions de cadrage, co-signature de la constitution.</div>
+      </div>
+      <div style="background:var(--gris1);padding:48px">
+        <div style="font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--or);margin-bottom:20px">Rôle 2</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:300;margin-bottom:20px">Le Porteur<br>de Pilier</h3>
+        <p style="font-size:.92rem;line-height:1.82;color:rgba(245,240,232,.55);font-weight:300;margin-bottom:16px">Les porteurs de piliers <strong style="color:rgba(245,240,232,.85);font-weight:400">prennent en charge un domaine concret</strong> du village : la ferme, l'école, le restaurant, le centre de soin, les événements… Ils conçoivent, lancent et font vivre leur pilier.</p>
+        <p style="font-size:.92rem;line-height:1.82;color:rgba(245,240,232,.55);font-weight:300;margin-bottom:24px">Un porteur de pilier peut être membre du cercle fondateur — ou rejoindre plus tard. Ce qui compte : la compétence, l'engagement et la capacité à porter une responsabilité réelle.</p>
+        <div style="border:1px solid var(--gris2);padding:18px 22px;font-size:.82rem;color:rgba(245,240,232,.4);line-height:1.65">Engagement : concevoir le modèle du pilier, le lancer, recruter son équipe, en assurer le fonctionnement et rendre compte à la communauté.</div>
+      </div>
+    </div>
+    <p style="font-size:.88rem;color:rgba(245,240,232,.35);font-style:italic;margin-top:24px;text-align:center">Une même personne peut être les deux. Et il est possible de rejoindre le projet comme habitant, sans être ni l'un ni l'autre.</p>
+  </div>
+</section>
+
+<hr class="div">
+
+
 <!-- ── 10 REJOINDRE ── -->
 <section class="rejoindre" id="rejoindre">
   <div class="wrap">
@@ -763,7 +951,6 @@
             <span class="rejoin-tag">Alimentation</span>
             <span class="rejoin-tag">École</span>
             <span class="rejoin-tag">Soin</span>
-            <span class="rejoin-tag">Maison de naissance</span>
             <span class="rejoin-tag">Habitat léger</span>
             <span class="rejoin-tag">Résidence intergénérationnelle</span>
             <span class="rejoin-tag">Accueil & gîtes</span>
@@ -777,25 +964,31 @@
             <span class="rejoin-tag">Relations avec le territoire</span>
           </div>
         </div>
-        <div class="rejoin-btns">
-          <a href="#form" class="btn-fill">Je veux rejoindre le cercle fondateur</a>
-          <a href="#form" class="btn-outline">Je veux porter un pilier du projet</a>
-          <a href="#form" class="btn-outline">Je souhaite soutenir l'aventure</a>
-        </div>
+
       </div>
 
       <!-- ── 11 FORMULAIRE ── -->
       <div id="form">
         <form id="joinForm" onsubmit="go(event)">
-          <div class="field-row">
-            <div class="field"><label>Prénom</label><input placeholder="Jean" required></div>
-            <div class="field"><label>Nom</label><input placeholder="Dupont" required></div>
-          </div>
-          <div class="field"><label>Email</label><input type="email" placeholder="jean@exemple.fr" required></div>
-          <div class="field"><label>Téléphone</label><input type="tel" placeholder="+33 6 …"></div>
 
-          <div class="tags-f">
-            <label>Je viens en tant que</label>
+          <!-- BLOC 1 — Intention -->
+          <div style="margin-bottom:32px">
+            <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:300;color:var(--blanc);margin-bottom:14px">Je souhaite…</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <input type="radio" class="ti" name="intention" id="int1">
+              <label for="int1" style="padding:15px 20px;font-size:.9rem;border-radius:2px;display:block;width:100%">⚡ Être bâtisseur — rejoindre le cercle fondateur</label>
+              <input type="radio" class="ti" name="intention" id="int2">
+              <label for="int2" style="padding:15px 20px;font-size:.9rem;border-radius:2px;display:block;width:100%">🏛️ Porter un pilier du projet</label>
+              <input type="radio" class="ti" name="intention" id="int3">
+              <label for="int3" style="padding:15px 20px;font-size:.9rem;border-radius:2px;display:block;width:100%">🤝 Soutenir l'aventure</label>
+              <input type="radio" class="ti" name="intention" id="int4">
+              <label for="int4" style="padding:15px 20px;font-size:.9rem;border-radius:2px;display:block;width:100%">📬 Être tenu·e informé·e de l'avancement</label>
+            </div>
+          </div>
+
+          <!-- BLOC 2 — Profil -->
+          <div class="tags-f" style="margin-bottom:32px">
+            <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:300;color:var(--blanc);margin-bottom:14px">Je viens en tant que…</div>
             <div class="tags">
               <input type="checkbox" class="ti" id="r1"><label for="r1">Futur habitant</label>
               <input type="checkbox" class="ti" id="r2"><label for="r2">Famille intéressée</label>
@@ -817,31 +1010,38 @@
             </div>
           </div>
 
+          <!-- SÉPARATEUR -->
+          <div style="border-top:1px solid var(--gris2);padding-top:24px;margin-bottom:20px">
+            <div style="font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:300;color:var(--blanc);margin-bottom:6px">Vos coordonnées</div>
+            <p style="font-size:.75rem;color:var(--gris-t);margin-bottom:20px">Les champs marqués * sont obligatoires. Le reste est optionnel.</p>
+          </div>
+
+          <div class="field-row">
+            <div class="field"><label>Prénom *</label><input placeholder="Jean" required></div>
+            <div class="field"><label>Nom *</label><input placeholder="Dupont" required></div>
+          </div>
+          <div class="field"><label>Email *</label><input type="email" placeholder="jean@exemple.fr" required></div>
+          <div class="field"><label>Téléphone</label><input type="tel" placeholder="+33 6 …"></div>
           <div class="field">
             <label>Situation familiale</label>
             <select>
               <option value="">Sélectionner…</option>
-              <option>Seul·e</option>
-              <option>En couple</option>
-              <option>Famille avec enfants</option>
-              <option>Famille recomposée</option>
-              <option>Groupe / Collectif</option>
-              <option>Autre</option>
+              <option>Seul·e</option><option>En couple</option>
+              <option>Famille avec enfants</option><option>Famille recomposée</option>
+              <option>Groupe / Collectif</option><option>Autre</option>
             </select>
           </div>
-
           <div class="field">
-            <label>Quel pilier aimeriez-vous contribuer à créer ?</label>
-            <input placeholder="Alimentation, école, soin, habitat, naissance, culture, accueil, gouvernance, festival…">
+            <label>Quel pilier aimeriez-vous porter ?</label>
+            <input placeholder="Alimentation, école, soin, habitat, culture, accueil, gouvernance, festival…">
           </div>
-
           <div class="field">
             <label>Ce qui me motive</label>
             <textarea placeholder="Parlez-nous librement."></textarea>
           </div>
           <div class="field">
             <label>Ce que je pourrais apporter</label>
-            <textarea placeholder="Compétences, temps, réseau, financement, expérience, énergie…"></textarea>
+            <textarea placeholder="Compétences, temps, réseau, financement, expérience…"></textarea>
           </div>
           <div class="field">
             <label>Mes questions</label>
@@ -882,6 +1082,23 @@
   const io = new IntersectionObserver(els => els.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); }), {threshold:.08});
   document.querySelectorAll('.r').forEach(el => io.observe(el));
 
+  // Hero buttons — active state
+  document.querySelectorAll('.hero-btns .btn-outline, .hero-btns .btn-fill').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      document.querySelectorAll('.hero-btns a').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // FAQ toggle
+  function toggleFaq(el) {
+    const p = el.querySelector('p');
+    const span = el.querySelector('span');
+    const isOpen = p.style.display === 'block';
+    p.style.display = isOpen ? 'none' : 'block';
+    span.textContent = isOpen ? '+' : '−';
+  }
+
   // Form → Google Sheets
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzCNX0diiC2wfX4ZEQIzmlO83lu3LxSG5T0Ha4PDgsHGRm1tLelRqB7iCdQaQxDnIek/exec';
 
@@ -892,10 +1109,13 @@
     btn.textContent = 'Envoi en cours…';
     btn.disabled = true;
 
-    // Collect checked roles
-    const roles = [...form.querySelectorAll('.ti:checked')].map(i => i.nextElementSibling.textContent).join(', ');
+    // Collect intention (radio) and roles (checkboxes)
+    const intentionEl = form.querySelector('input[name="intention"]:checked');
+    const intention = intentionEl ? intentionEl.nextElementSibling.textContent.trim() : '';
+    const roles = [...form.querySelectorAll('input[type="checkbox"].ti:checked')].map(i => i.nextElementSibling.textContent).join(', ');
 
     const data = {
+      intention:  intention,
       prenom:     form.querySelector('input[placeholder="Jean"]').value,
       nom:        form.querySelector('input[placeholder="Dupont"]').value,
       email:      form.querySelector('input[type="email"]').value,
