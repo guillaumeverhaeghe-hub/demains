@@ -104,7 +104,8 @@
     /* LIEU */
     .lieu-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gris2); margin-top:56px; }
     .lieu-photos { grid-column:1; display:grid; grid-template-rows:1fr 1fr; gap:1px; background:var(--gris2); align-self:stretch; }
-    .lieu-img { height:520px; overflow:hidden; }
+    .lieu-img { height:520px; overflow:hidden; align-self:stretch; }
+    .lieu-grid > .lieu-img { height:auto; min-height:520px; }
     .lieu-img.half { height:100%; min-height:220px; }
     .lieu-img img { width:100%; height:100%; object-fit:cover; filter:saturate(.65) brightness(.8); transition:transform .8s; }
     .lieu-img:hover img { transform:scale(1.04); }
